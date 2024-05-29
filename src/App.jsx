@@ -1,5 +1,6 @@
 import React from "react";
 import Snowman from "./Snowman.jsx";
+import { ENGLISH_WORDS } from "./words.js";
 import "./App.css";
 
 /** Renders page (with Snowman game) */
@@ -7,7 +8,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <Snowman />
+      <Snowman words={ENGLISH_WORDS}/>
     </div>
   );
 }
