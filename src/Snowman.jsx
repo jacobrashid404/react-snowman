@@ -8,6 +8,7 @@ import img3 from "./3.png";
 import img4 from "./4.png";
 import img5 from "./5.png";
 import img6 from "./6.png";
+import Button from "./Button.jsx";
 
 /** Snowman game: plays hangman-style game with a melting snowman.
  *
@@ -60,7 +61,7 @@ function Snowman({
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map((ltr) => (
       <button
-        className={"letter_" + ltr} // "letter_a" ...
+        className={"letter_" + ltr} // "letter_a" ... TODO: include Snowman-letter-{letter}
         key={ltr}
         value={ltr}
         onClick={handleGuess}
@@ -69,6 +70,15 @@ function Snowman({
         {ltr}
       </button>
     ));
+  }
+
+  /** handleRestart: picks a random word, reset the guessed list and number of
+   * wrong guesses
+   */
+  function handleRestart() {
+    setAnswer(randomWord(words));
+    setGuessedLetters(() => new Set());
+    setNWrong(0);
   }
 
   return (
@@ -80,10 +90,15 @@ function Snowman({
       />
       <p>Wrong guesses: {nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
-      { nWrong < maxWrong
-        ? <p>{generateButtons()}</p>
-        : <p>You Lose! Word was: {answer}</p>
-      }
+      {nWrong < maxWrong ? (
+        <p>{generateButtons()}</p>
+      ) : (
+        <p>You Lose! Word was: {answer}</p>
+      )}
+      <Button
+        label="Restart Game"
+        click={handleRestart}
+      />
     </div>
   );
 }
