@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Snowman.css";
+import { randomWord } from "./words.js";
 import img0 from "./0.png";
 import img1 from "./1.png";
 import img2 from "./2.png";
@@ -30,7 +31,7 @@ function Snowman({
 
   const [nWrong, setNWrong] = useState(0);
   const [guessedLetters, setGuessedLetters] = useState(() => new Set());
-  const [answer, setAnswer] = useState(words[0]);
+  const [answer, setAnswer] = useState(randomWord(words));
 
   /** guessedWord: show current-state of word:
    if guessed letters are {a,p,e}, show "app_e" for "apple"
@@ -79,7 +80,10 @@ function Snowman({
       />
       <p>Wrong guesses: {nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
-      <p>{generateButtons()}</p>
+      { nWrong < maxWrong
+        ? <p>{generateButtons()}</p>
+        : <p>You Lose! Word was: {answer}</p>
+      }
     </div>
   );
 }
