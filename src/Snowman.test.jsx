@@ -2,7 +2,7 @@ import { test, expect } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
 import Snowman from "./Snowman.jsx";
 
-test("only allow six wrong guesses", function () {
+test("image doesn't disappear if more than 6 guesses are made", function () {
   const { container } = render(<Snowman />);
   const lettersToCheck = ["w", "x", "y", "z", "b", "c", "k"];
 
@@ -12,6 +12,6 @@ test("only allow six wrong guesses", function () {
     return elem;
   });
 
-  expect(container.querySelector(".Snowman-img")).toBeInTheDocument();
-  //TODO: fix test, img will still appear on page, it'll just be broken
+  const snowmanImg = container.querySelector(".Snowman-img")
+  expect(snowmanImg.src).toContain("png");
 });
