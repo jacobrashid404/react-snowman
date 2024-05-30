@@ -90,6 +90,18 @@ function Snowman({
     setNWrong(0);
   }
 
+  function showGameBoard() {
+    if (checkWin(answer, guessedLetters)) {
+      return <p>You Win!</p>;
+    }
+    else if (nWrong === maxWrong) {
+      return <p>You Lose!</p>
+    }
+    else {
+      return <p>{generateButtons()}</p>
+    }
+  }
+
   return (
     <div className="Snowman">
       <img
@@ -97,18 +109,9 @@ function Snowman({
         src={images[nWrong]}
         alt={nWrong}
       />
-      <p>Wrong guesses: {nWrong}</p>
-      <p>Remaining wrong guesses: {maxWrong - nWrong}</p>
+      <p>Wrong guesses: {nWrong} | Remaining: {maxWrong - nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
-      {nWrong < maxWrong && !checkWin(answer, guessedLetters) ? ( //pull this out into a function
-        <p>{generateButtons()}</p>
-      ) : nWrong === maxWrong ? (
-        <p>You Lose! Word was: {answer}</p>
-      ) : checkWin(answer, guessedLetters) ? (
-        <p>You Win!</p>
-      ) : (
-        <p></p>
-      )}
+      {showGameBoard()}
       <Button
         label="Restart Game"
         click={handleRestart}
