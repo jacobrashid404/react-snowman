@@ -14,6 +14,10 @@ exports[`snapshot test 1`] = `
       Wrong guesses: 
       0
     </p>
+    <p>
+      Remaining wrong guesses: 
+      6
+    </p>
     <p
       class="Snowman-word"
     >
