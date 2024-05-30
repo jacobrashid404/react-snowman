@@ -98,6 +98,7 @@ function Snowman({
         alt={nWrong}
       />
       <p>Wrong guesses: {nWrong}</p>
+      <p>Remaining wrong guesses: {maxWrong - nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
       {nWrong < maxWrong && !checkWin(answer, guessedLetters) ? ( //pull this out into a function
         <p>{generateButtons()}</p>
