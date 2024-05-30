@@ -93,20 +93,21 @@ function Snowman({
   return (
     <div className="Snowman">
       <img
-        class="Snowman-img"
+        className="Snowman-img"
         src={images[nWrong]}
         alt={nWrong}
       />
       <p>Wrong guesses: {nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
-      {nWrong < maxWrong && !checkWin(answer, guessedLetters)
-        ? <p>{generateButtons()}</p>
-          : nWrong === maxWrong
-          ? <p>You Lose! Word was: {answer}</p>
-          : checkWin(answer, guessedLetters)
-          ? <p>You Win!</p>
-          : <p></p>
-      }
+      {nWrong < maxWrong && !checkWin(answer, guessedLetters) ? ( //pull this out into a function
+        <p>{generateButtons()}</p>
+      ) : nWrong === maxWrong ? (
+        <p>You Lose! Word was: {answer}</p>
+      ) : checkWin(answer, guessedLetters) ? (
+        <p>You Win!</p>
+      ) : (
+        <p></p>
+      )}
       <Button
         label="Restart Game"
         click={handleRestart}
