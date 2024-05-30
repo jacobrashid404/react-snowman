@@ -41,6 +41,16 @@ function Snowman({
     return answer.split("").map((ltr) => (guessedLetters.has(ltr) ? ltr : "_"));
   }
 
+  function checkWin(word, guessedLetters) {
+    for (const letter of word) {
+      if (!guessedLetters.has(letter)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   /** handleGuess: handle a guessed letter:
    - add to guessed letters
    - if not in answer, increase number-wrong guesses
@@ -61,7 +71,6 @@ function Snowman({
   function generateButtons() {
     return "abcdefghijklmnopqrstuvwxyz".split("").map((ltr) => (
       <button
-        className={"letter_" + ltr} // "letter_a" ... TODO: include Snowman-letter-{letter}
         key={ltr}
         value={ltr}
         onClick={handleGuess}
@@ -90,11 +99,14 @@ function Snowman({
       />
       <p>Wrong guesses: {nWrong}</p>
       <p className="Snowman-word">{guessedWord()}</p>
-      {nWrong < maxWrong ? (
-        <p>{generateButtons()}</p>
-      ) : (
-        <p>You Lose! Word was: {answer}</p>
-      )}
+      {nWrong < maxWrong && !checkWin(answer, guessedLetters)
+        ? <p>{generateButtons()}</p>
+          : nWrong === maxWrong
+          ? <p>You Lose! Word was: {answer}</p>
+          : checkWin(answer, guessedLetters)
+          ? <p>You Win!</p>
+          : <p></p>
+      }
       <Button
         label="Restart Game"
         click={handleRestart}
