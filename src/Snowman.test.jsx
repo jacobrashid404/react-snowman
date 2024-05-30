@@ -59,7 +59,9 @@ test("Test loss logic with custom maxWrong value", function () {
 
 //TODO: real verification of functionality, do we win?
 
-test("test for win", function () {});
+test("test for win", function () {
+
+});
 
 //TODO: some more testing!
 
